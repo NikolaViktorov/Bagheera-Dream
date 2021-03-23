@@ -1,19 +1,16 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using server.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace server
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    
+    using server.Models;
+    using server.Services;
+    using server.Services.Contracts;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -32,6 +29,10 @@ namespace server
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DevConnection"));
             });
+
+            services.AddTransient<ICatsService, CatsService>();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +44,13 @@ namespace server
             }
 
             app.UseRouting();
+
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+            });
 
             app.UseAuthorization();
 

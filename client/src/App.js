@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import * as catsService from './services/catsService';
 
 function App() {
+   catsService.demoCreate();
   return (
     <div className="App">
       <header className="App-header">
