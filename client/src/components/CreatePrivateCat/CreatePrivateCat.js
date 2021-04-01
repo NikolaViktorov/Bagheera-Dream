@@ -1,4 +1,5 @@
 import * as catsService from '../../services/catsService'
+import { post } from 'axios'; 
 
 import ImageUploader from 'react-images-upload';
 import { Component } from 'react'
@@ -16,7 +17,6 @@ class CreatePrivateCat extends Component {
 
     onCreatePrivateCatSubmitHandler(e) {
         e.preventDefault();
-        console.log(this.state.pictures)
         const { name, age, gender, breed, color, birthday, FatherName, MotherName } = e.target;
         const cat = {
             Name: name.value,
@@ -28,8 +28,18 @@ class CreatePrivateCat extends Component {
             FatherName: FatherName.value,
             MotherName: MotherName.value,
         }
-        catsService.uploadPrivateCatImage(this.state.pictures);
-        catsService.createPrivateCat(cat);
+        //catsService.uploadPrivateCatImage(this.state.pictures);
+       // catsService.createPrivateCat(cat);
+       var filesArray  = this.state.pictures;
+       console.log(filesArray);
+       for(var i in filesArray){
+             console.log("files",filesArray[i]);
+             let f = new FormData();
+             f.append("File",filesArray[i])
+             post('http://localhost:52818/Cats/uploadCatImage', f, {
+                    headers: {'Content-Type': 'multipart/form-data'} // works
+             });
+        }
     }
 
     onDrop(picture) {

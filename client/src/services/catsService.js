@@ -1,3 +1,5 @@
+import { post } from 'axios'; 
+
 const url = 'http://localhost:52818';
 
 // Testing 
@@ -39,14 +41,13 @@ export function createPrivateCat(cat) {
 }
 
 export function uploadPrivateCatImage(images) {
+        const newUrl = url + '/Cats/uploadCatImage';
         const formData = new FormData();
-        formData.append('body', images);
-        fetch(url + `/Cats/uploadCatImage`, {
-                method: 'POST',
+        formData.append('file', images);
+        const config = {
                 headers: {
-                        'content-type': 'multipart/form-data',
+                        'content-type': 'multipart/form-data',  
                 },
-                body: formData
-        })
-        .catch(err => console.log(err));
+        };
+        post(newUrl, formData, config);
 }

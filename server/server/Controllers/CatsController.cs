@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Protocols;
 using server.Models;
 using server.Services.Contracts;
 using server.ViewModels.Cats;
@@ -9,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Web;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace server.Controllers
@@ -56,21 +61,19 @@ namespace server.Controllers
         }
 
         [HttpPost("uploadCatImage")]
-        public async Task<IActionResult> UploadCatImage([FromForm] ICollection<IFormFile> body)
+        public async Task<IActionResult> UploadCatImage([FromForm] ImageUploadInputModel model)
         {
-            string fileName = string.Empty;
-            //if (body != null)
-            //{
-            //    string uploadDir = Path.Combine(this.hostingEnvironment.WebRootPath, "catImages");
-            //    fileName = Guid.NewGuid().ToString() + "-" + body.FileName;
-            //    string filePath = Path.Combine(uploadDir, fileName);
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        body.CopyTo(fileStream);
-            //    }
-            //}
+            var file = model.File;
 
-            return Ok();
+            if (file.Length > 0)
+            {
+                string path = Path.Combine("uploadFiles");
+                using (var fs = new FileStream(Path.Combine(path, file.FileName), FileMode.Create))
+                {
+                    await file.CopyToAsync(fs);
+                }
+            }
+            return BadRequest();
         }
     }
 }
