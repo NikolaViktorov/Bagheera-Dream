@@ -1,19 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting.Internal;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Protocols;
-using server.Models;
 using server.Services.Contracts;
 using server.ViewModels.Cats;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace server.Controllers
@@ -32,9 +21,9 @@ namespace server.Controllers
         }
 
         [HttpGet("cats")]
-        public async Task<ICollection<CatViewModel>> GetCats()
+        public async Task<string> GetCats(string gender)
         {
-            return await this.catsService.GetAll();
+            return await this.catsService.GetAll(gender);
         }
 
         [HttpGet("cat")]
@@ -43,37 +32,11 @@ namespace server.Controllers
             return await this.catsService.GetCat(id);
         }
 
-        [HttpPost("createCat")]
-        public async Task<bool> CreateCat(CatInputModel cat)
+        [HttpPost("createPrivateCat")]
+        public async Task<IActionResult> CreatePrivateCat([FromForm] CatInputModel model)
         {
-            bool didPass = false;
-            try
-            {
-                await this.catsService.AddCat(cat);
-                didPass = true;
-            }
-            catch (Exception e)
-            {
-                // ?? pass to react somehow
-            }
-
-            return didPass;
-        }
-
-        [HttpPost("uploadCatImage")]
-        public async Task<IActionResult> UploadCatImage([FromForm] ImageUploadInputModel model)
-        {
-            var file = model.File;
-
-            if (file.Length > 0)
-            {
-                string path = Path.Combine("uploadFiles");
-                using (var fs = new FileStream(Path.Combine(path, file.FileName), FileMode.Create))
-                {
-                    await file.CopyToAsync(fs);
-                }
-            }
-            return BadRequest();
+            await this.catsService.AddCat(model);
+            return Ok();
         }
     }
 }

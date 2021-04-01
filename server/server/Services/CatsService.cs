@@ -1,32 +1,30 @@
-﻿namespace server.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.EntityFrameworkCore;
-    using server.Models;
-    using server.Models.Cats;
-    using server.Models.Enums;
-    using server.Services.Contracts;
-    using server.ViewModels.Cats;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using server.Models;
+using server.Models.Cats;
+using server.Models.Enums;
+using server.Services.Contracts;
+using server.ViewModels.Cats;
 
+namespace server.Services
+{
     public class CatsService : ICatsService
     {
         private readonly CatsDbContext db;
-        private readonly IHostingEnvironment hostingEnvironment;
 
-        public CatsService(CatsDbContext db, IHostingEnvironment hostingEnvironment)
+        public CatsService(CatsDbContext db)
         {
             this.db = db;
-            this.hostingEnvironment = hostingEnvironment;
         }
 
         public async Task AddCat(CatInputModel input)
         {
-            string fileName = this.UploadFile(input);
+            var fileName = this.UploadFile(input);
 
             var cat = new Cat()
             {
@@ -129,15 +127,33 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<ICollection<CatViewModel>> GetAll()
+        public async Task<string> GetAll(string gender)
         {
-            return await this.db.Cats.Select(c => new CatViewModel()
+            var genderId = (int)Enum.Parse(typeof(Gender), gender);
+            List<CatViewModel> cats = new List<CatViewModel>();
+            if (gender == null)
             {
-                CatId = c.CatId,
-                Name = c.Name,
-                Age = c.Age,
-                ProfileImage = c.ProfileImage,
-            }).ToListAsync();
+                cats = await this.db.Cats.Select(c => new CatViewModel()
+                {
+                    CatId = c.CatId,
+                    Name = c.Name,
+                    Age = c.Age,
+                    ProfileImage = c.ProfileImage,
+                }).ToListAsync();
+            }
+            else
+            {
+                cats = await this.db.Cats.Where(c => c.GenderId == genderId).Select(c => new CatViewModel()
+                {
+                    CatId = c.CatId,
+                    Name = c.Name,
+                    Age = c.Age,
+                    ProfileImage = c.ProfileImage,
+                }).ToListAsync();
+            }
+
+            var json = JsonConvert.SerializeObject(cats);
+            return json;
         }
 
         public async Task<CatDetailsViewModel> GetCat(string id)
@@ -188,16 +204,21 @@
         private string UploadFile(CatInputModel input)
         {
             string fileName = null;
-            //if (input.ProfileImage != null)
-            //{
-            //    string uploadDir = Path.Combine(this.hostingEnvironment.WebRootPath, "catImages");
-            //    fileName = Guid.NewGuid().ToString() + "-" + input.ProfileImage.FileName;
-            //    string filePath = Path.Combine(uploadDir, fileName);
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        input.ProfileImage.CopyTo(fileStream);
-            //    }
-            //}
+            if (input.File != null)
+            {
+                string baseFolderPath = Path.GetFullPath(
+                    Path.Combine(
+                        Directory.GetCurrentDirectory(), @"..\..\")
+                    );
+                string clientFolderPath = baseFolderPath + "client\\src";
+                string uploadDir = Path.Combine(clientFolderPath, "catImages");
+                fileName = Guid.NewGuid().ToString() + "-" + input.File.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    input.File.CopyTo(fileStream);
+                }
+            }
 
             return fileName;
         }

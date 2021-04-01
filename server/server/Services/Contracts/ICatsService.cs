@@ -7,10 +7,11 @@
 
     public interface ICatsService
     {
-        public Task<ICollection<CatViewModel>> GetAll();
+        public Task<string> GetAll(string gender);
 
         public Task<CatDetailsViewModel> GetCat(string id);
 
         public Task AddCat(CatInputModel cat);
+
     }
 }

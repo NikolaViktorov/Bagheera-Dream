@@ -1,5 +1,4 @@
 import * as catsService from '../../services/catsService'
-import { post } from 'axios'; 
 
 import ImageUploader from 'react-images-upload';
 import { Component } from 'react'
@@ -10,7 +9,6 @@ class CreatePrivateCat extends Component {
         super(props);
         this.state = { 
             pictures: [], 
-            file: null,
         };
         this.onDrop = this.onDrop.bind(this);
     }
@@ -27,19 +25,9 @@ class CreatePrivateCat extends Component {
             Birthday: birthday.value,
             FatherName: FatherName.value,
             MotherName: MotherName.value,
+            Files: this.state.pictures,
         }
-        //catsService.uploadPrivateCatImage(this.state.pictures);
-       // catsService.createPrivateCat(cat);
-       var filesArray  = this.state.pictures;
-       console.log(filesArray);
-       for(var i in filesArray){
-             console.log("files",filesArray[i]);
-             let f = new FormData();
-             f.append("File",filesArray[i])
-             post('http://localhost:52818/Cats/uploadCatImage', f, {
-                    headers: {'Content-Type': 'multipart/form-data'} // works
-             });
-        }
+        catsService.createPrivateCat(cat);
     }
 
     onDrop(picture) {
@@ -47,10 +35,6 @@ class CreatePrivateCat extends Component {
             pictures: this.state.pictures.concat(picture),
         });
     }
-
-    setFile(e) {
-        this.setState({ file: e.target.files[0] });
-      }
 
     render() {
         return (
@@ -122,7 +106,6 @@ class CreatePrivateCat extends Component {
                                 <span class="actions"></span>
                             </span>
                         </p>
-                        <input type="file" onChange={e => this.setFile(e)} />
                         <ImageUploader
                             withIcon={true}
                             buttonText='Choose images'
