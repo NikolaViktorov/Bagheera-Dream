@@ -9,6 +9,7 @@
     using Microsoft.EntityFrameworkCore;
     using server.Models;
     using server.Models.Cats;
+    using server.Models.Enums;
     using server.Services.Contracts;
     using server.ViewModels.Cats;
 
@@ -32,9 +33,9 @@
                 Name = input.Name,
                 Age = input.Age,
                 Birthday = input.Birthday,
-                Gender = input.Gender,
-                Breed = input.Breed,
-                Color = input.Color,
+                Gender = (Gender)input.Gender,
+                Breed = (Breed)input.Breed, 
+                Color = (Color)input.Color,
                 ProfileImage = fileName,
             };
 
@@ -187,16 +188,16 @@
         private string UploadFile(CatInputModel input)
         {
             string fileName = null;
-            if (input.ProfileImage != null)
-            {
-                string uploadDir = Path.Combine(this.hostingEnvironment.WebRootPath, "catImages");
-                fileName = Guid.NewGuid().ToString() + "-" + input.ProfileImage.FileName;
-                string filePath = Path.Combine(uploadDir, fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    input.ProfileImage.CopyTo(fileStream);
-                }
-            }
+            //if (input.ProfileImage != null)
+            //{
+            //    string uploadDir = Path.Combine(this.hostingEnvironment.WebRootPath, "catImages");
+            //    fileName = Guid.NewGuid().ToString() + "-" + input.ProfileImage.FileName;
+            //    string filePath = Path.Combine(uploadDir, fileName);
+            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //    {
+            //        input.ProfileImage.CopyTo(fileStream);
+            //    }
+            //}
 
             return fileName;
         }

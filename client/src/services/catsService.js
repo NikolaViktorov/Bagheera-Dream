@@ -24,3 +24,29 @@ export function demoCreate() {
         .then(res => res.json())
         .catch(err => console.log(err));
 }
+
+export function createPrivateCat(cat) { 
+        console.log(cat);
+        return fetch(url + '/Cats/createCat', {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cat)
+        })
+        .then(res => res.json())
+        .catch(err => console.log(err));
+}
+
+export function uploadPrivateCatImage(images) {
+        const formData = new FormData();
+        formData.append('body', images);
+        fetch(url + `/Cats/uploadCatImage`, {
+                method: 'POST',
+                headers: {
+                        'content-type': 'multipart/form-data',
+                },
+                body: formData
+        })
+        .catch(err => console.log(err));
+}

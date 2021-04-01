@@ -4,6 +4,7 @@
 
     using server.Models.Enums;
     using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
 
     public class CatInputModel
     {
@@ -11,11 +12,11 @@
 
         public int Age { get; set; }
 
-        public Gender Gender { get; set; }
+        public int Gender { get; set; }
 
-        public Breed Breed { get; set; }
+        public int Breed { get; set; }
 
-        public Color Color { get; set; }
+        public int Color { get; set; }
 
         public DateTime? Birthday { get; set; }
 
