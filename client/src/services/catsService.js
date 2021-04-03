@@ -3,7 +3,7 @@ import { post } from 'axios';
 const url = 'http://localhost:52818';
 
 export function getFemaleCats() {
-        return fetch(url + '/Cats/cats?gender=Female', {
+        return fetch(url + '/Cats/cats?gender=Male', {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
@@ -11,7 +11,7 @@ export function getFemaleCats() {
                 },
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => data)
         .catch(err => console.log(err));
 }
 

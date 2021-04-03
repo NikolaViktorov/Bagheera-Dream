@@ -1,23 +1,22 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using server.Services.Contracts;
-using server.ViewModels.Cats;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace server.Controllers
+﻿namespace server.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    
+    using server.Services.Contracts;
+    using server.ViewModels.Cats;
+
+
     [ApiController]
     [Route("[controller]")]
     public class CatsController : ControllerBase
     {
         private readonly ICatsService catsService;
-        private readonly IHostingEnvironment hostingEnvironment;
 
-        public CatsController(ICatsService catsService, IHostingEnvironment hostingEnvironment)
+        public CatsController(ICatsService catsService)
         {
             this.catsService = catsService;
-            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet("cats")]
