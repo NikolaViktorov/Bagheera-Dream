@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import styles from './mystyle.module.css'; 
 
 class FemaleCat extends Component {
     constructor(props) {
@@ -13,9 +14,9 @@ class FemaleCat extends Component {
 
     render() {
         return (
-            <div className='cat-main-content'>
-                <h1 className='cat-main-head'>{this.state.name} is {this.state.age}</h1>
-                <img className='cat-main-image' src={this.state.img.default}/>
+            <div className={styles.catMain}>
+                <h1 className={styles.catMainHead}>{this.state.name} is {this.state.age}</h1>
+                <img className={styles.catMainImage} src={this.state.img.default}/>
             </div>
         );
     }
