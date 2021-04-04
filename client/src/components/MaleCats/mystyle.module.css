@@ -1,0 +1,16 @@
+.catMain {
+    margin-left: 100px;
+    padding: 5px;
+    width: fit-content;
+    height: auto;
+    border: 1px solid black;
+}
+
+.catMainHead {
+    font-size: 26px;
+}
+
+.catMainImage {
+    width: 400px;
+    height: auto;
+}

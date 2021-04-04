@@ -3,8 +3,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import CreatePrivateCat from './components/CreatePrivateCat/CreatePrivateCat'
 import FemaleCats from './components/FemaleCats/FemaleCats'
+import MaleCats from './components/MaleCats/MaleCats'
 import { Route, Link, NavLink, Redirect, Switch } from 'react-router-dom';
-import { createPrivateCat } from './services/catsService';
 
 function App() {
   return (
@@ -15,7 +15,8 @@ function App() {
           
         </Route>
         <Route path="/cats/female" component={FemaleCats} />
-        <Route path="/private/create" component={createPrivateCat} />
+        <Route path="/cats/male" component={MaleCats} />
+        <Route path="/private/create" component={CreatePrivateCat} />
         <Route render={() => <h1 >Error Page</h1>} />
       </Switch>
       <Footer />

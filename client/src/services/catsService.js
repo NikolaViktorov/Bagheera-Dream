@@ -15,6 +15,19 @@ export function getFemaleCats() {
         .catch(err => console.log(err));
 }
 
+export function getMaleCats() {
+        return fetch(url + '/Cats/cats?gender=Male', {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                        'content-type': 'application/json',
+                },
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => console.log(err));
+}
+
 export function createPrivateCat(cat) { 
        var filesArray  = cat.Files;
         for(var i in filesArray){

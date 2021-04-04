@@ -6,11 +6,10 @@ import logo from '../../images/logo.png';
 const Header = () => {
     return (
         <header>
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar-expand-lg">
             <div className="container">
-                
-                <div className="collaps navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ml-auto">
+                <div className="collaps" id="navbarSupportedContent">
+                    <ul className="ml-auto">
                         <li className="nav-item">
                             <Link to="/">
                                 <img className={styles.logoImage} src={logo} alt='Logo' />
