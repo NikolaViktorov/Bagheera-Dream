@@ -14,7 +14,7 @@ class MaleCats extends Component {
 
     async componentDidMount() {
         this.setState({
-            cats: await catsService.getMaleCats(),
+            cats: await catsService.getPrivateCats('Male'),
         });
     }
 

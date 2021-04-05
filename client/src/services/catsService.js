@@ -2,21 +2,8 @@ import { post } from 'axios';
 
 const url = 'http://localhost:52818';
 
-export function getFemaleCats() {
-        return fetch(url + '/Cats/cats?gender=Female', {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                        'content-type': 'application/json',
-                },
-        })
-        .then(res => res.json())
-        .then(data => data)
-        .catch(err => console.log(err));
-}
-
-export function getMaleCats() {
-        return fetch(url + '/Cats/cats?gender=Male', {
+export function getPrivateCats(gender) {
+        return fetch(url + '/Cats/cats?gender=' + gender, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
@@ -45,4 +32,17 @@ export function createPrivateCat(cat) {
                        headers: {'Content-Type': 'multipart/form-data'} // works
                 });
            }
+}
+
+export function getSliderCats(count) {
+        return fetch(url + '/Cats/cats?gender=Male', {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                        'content-type': 'application/json',
+                },
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => console.log(err));
 }
