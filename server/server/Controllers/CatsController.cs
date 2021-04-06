@@ -26,7 +26,7 @@
         }
 
         [HttpGet("cat")]
-        public async Task<CatDetailsViewModel> GetCat(string id)
+        public async Task<string> GetCat(string id)
         {
             return await this.catsService.GetCat(id);
         }

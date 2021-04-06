@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Component } from 'react';
 import styles from './mystyle.module.css'; 
 
@@ -6,6 +8,7 @@ class FemaleCat extends Component {
         super(props);
 
         this.state = {
+            id: props.CatId,
             name: props.Name,
             age: props.Age,
             img: require("../../catImages/" + props.ProfileImage)
@@ -16,7 +19,9 @@ class FemaleCat extends Component {
         return (
             <div className={styles.catMain}>
                 <h1 className={styles.catMainHead}>{this.state.name} is {this.state.age}</h1>
-                <img className={styles.catMainImage} src={this.state.img.default}/>
+                <Link to={'/cat/' + this.state.id}>
+                    <img className={styles.catMainImage} src={this.state.img.default}/>
+                </Link>
             </div>
         );
     }

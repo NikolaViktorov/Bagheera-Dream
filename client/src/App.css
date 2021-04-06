@@ -173,7 +173,7 @@ footer {
     text-align: center;
 }
 
-.news-title {
+.cats-title {
     color: white;
     font-size: 25px;
     padding: 8px 12px;
@@ -257,32 +257,32 @@ footer {
     }
 }
 
-.news-btn {
+.cats-btn {
     position: absolute;
     bottom: 8px;
     right: 16px;
 }
 
-.newsImage-box {
+.catsImage-box {
     position: relative;
     width: 100%;
     height: 70vh;
 }
 
-.newsImage-details {
+.catsImage-details {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.newsImage-title-box {
+.catsImage-title-box {
     box-sizing: border-box;
     width: 100%;
     padding: 0px 60px;
     z-index: 2;
 }
 
-.newsImage {
+.catsImage {
     overflow: hidden;
     width: 100%;
     height: 550px;

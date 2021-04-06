@@ -156,7 +156,7 @@ namespace server.Services
             return json;
         }
 
-        public async Task<CatDetailsViewModel> GetCat(string id)
+        public async Task<string> GetCat(string id)
         {
             var cat = await this.db.Cats.FirstOrDefaultAsync(c => c.CatId == id);
 
@@ -170,9 +170,9 @@ namespace server.Services
                 Name = cat.Name,
                 Age = cat.Age,
                 Birthday = (DateTime)cat.Birthday,
-                Gender = cat.Gender,
-                Breed = cat.Breed,
-                Color = cat.Color,
+                Gender = cat.Gender.ToString(),
+                Breed = cat.Breed.ToString(),
+                Color = cat.Color.ToString(),
                 ProfileImage = cat.ProfileImage,
             };
 
@@ -198,7 +198,9 @@ namespace server.Services
                 };
             }
 
-            return model;
+            var json = JsonConvert.SerializeObject(model);
+
+            return json;
         }
 
         private string UploadFile(CatInputModel input)

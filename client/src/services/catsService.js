@@ -15,6 +15,19 @@ export function getPrivateCats(gender) {
         .catch(err => console.log(err));
 }
 
+export function getCatDetails(catId) {
+        return fetch(url + '/Cats/cat?id=' + catId, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                        'content-type': 'application/json',
+                },
+        })
+        .then(res => res.json())
+        .then(data => data)
+        .catch(err => console.log(err));
+}
+
 export function createPrivateCat(cat) { 
        var filesArray  = cat.Files;
         for(var i in filesArray){

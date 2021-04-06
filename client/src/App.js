@@ -5,6 +5,7 @@ import CreatePrivateCat from './components/CreatePrivateCat/CreatePrivateCat'
 import FemaleCats from './components/FemaleCats/FemaleCats'
 import MaleCats from './components/MaleCats/MaleCats'
 import Home from './components/Home/Home';
+import CatDetails from './components/CatDetails/CatDetails';
 import { Route, Link, NavLink, Redirect, Switch } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         </Route>
         <Route path="/cats/female" component={FemaleCats} />
         <Route path="/cats/male" component={MaleCats} />
+        <Route path="/cat/:id" component={CatDetails}/>
         <Route path="/private/create" component={CreatePrivateCat} />
         <Route render={() => <h1 >Error Page</h1>} />
       </Switch>

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import * as catsService from '../../services/catsService'
 import { Component } from 'react';
 import MaleCat from './MaleCat';
@@ -22,7 +21,7 @@ class MaleCats extends Component {
         return (
             <h1>
                 {
-                    this.state.cats.map(c => <MaleCat key={c.CatId} Age={c.Age} ProfileImage={c.ProfileImage} Name={c.Name}/>)
+                    this.state.cats.map(c => <MaleCat key={c.CatId} CatId={c.CatId} Age={c.Age} ProfileImage={c.ProfileImage} Name={c.Name}/>)
                 }
             </h1>
         );

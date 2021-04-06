@@ -12,11 +12,11 @@
 
         public string ProfileImage { get; set; }
 
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
 
-        public Color Color { get; set; }
+        public string Color { get; set; }
 
-        public Breed Breed { get; set; }
+        public string Breed { get; set; }
 
         public DateTime Birthday { get; set; }
 

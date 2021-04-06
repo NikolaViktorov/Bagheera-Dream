@@ -17,7 +17,7 @@ class SliderCat extends Component {
             <div className="each-fade">
                 <div className="image-container">
                     <Link to={"/cat/" + this.state.id}>
-                        <img className="newsImage" src={this.state.img.default} />
+                        <img className="catsImage" src={this.state.img.default} />
                     </Link>
                 </div>
             </div>

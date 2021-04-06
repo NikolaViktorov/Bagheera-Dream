@@ -9,7 +9,7 @@
     {
         public Task<string> GetAll(string gender);
 
-        public Task<CatDetailsViewModel> GetCat(string id);
+        public Task<string> GetCat(string id);
 
         public Task AddCat(CatInputModel cat);
 
