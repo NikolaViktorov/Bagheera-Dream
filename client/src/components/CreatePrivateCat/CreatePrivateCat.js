@@ -27,7 +27,8 @@ class CreatePrivateCat extends Component {
             MotherName: MotherName.value,
             Files: this.state.pictures,
         }
-        catsService.createPrivateCat(cat);
+        catsService.createPrivateCat(cat)
+            .then(() => this.props.history.push('/'));
     }
 
     onDrop(picture) {

@@ -25,7 +25,7 @@
             return await this.catsService.GetAll(gender);
         }
 
-        [HttpGet("cat")]
+        [HttpGet("cat")] 
         public async Task<string> GetCat(string id)
         {
             return await this.catsService.GetCat(id);

@@ -18,7 +18,7 @@ class FemaleCat extends Component {
     render() {
         return (
             <div className={styles.catMain}>
-                <h1 className={styles.catMainHead}>{this.state.name} is {this.state.age}</h1>
+                <h1 className={styles.catMainHead}>{this.state.name} is {this.state.age} years old</h1>
                 <Link to={'/cat/' + this.state.id}>
                     <img className={styles.catMainImage} src={this.state.img.default}/>
                 </Link>
