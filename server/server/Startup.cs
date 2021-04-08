@@ -31,6 +31,7 @@ namespace server
             });
 
             services.AddTransient<ICatsService, CatsService>();
+            services.AddTransient<IUsersService, UsersService>();
 
             services.AddCors();
         }

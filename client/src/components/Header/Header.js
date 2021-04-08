@@ -30,6 +30,9 @@ const Header = () => {
                         <li className="nav-item">
                             <NavLink activeClassName={styles.active} to="/private/create">Add Cat</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink activeClassName={styles.active} to="/user/register">Register</NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>

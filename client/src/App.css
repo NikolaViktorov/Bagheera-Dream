@@ -492,3 +492,8 @@ footer {
     text-decoration: none;
     color: white;
 }
+
+.error {
+    color: red;
+    font-size: 16px;
+}

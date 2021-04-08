@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bagheeras.Dream.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using server.Models.Cats;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using server.Models.PublicPets;
 
 namespace server.Models
 {
@@ -22,6 +20,10 @@ namespace server.Models
         public virtual DbSet<Female> Females { get; set; }
 
         public virtual DbSet<Male> Males { get; set; }
+
+        public virtual DbSet<Pet> Pets { get; set; }
+
+        public virtual DbSet<ApplicationUser> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
