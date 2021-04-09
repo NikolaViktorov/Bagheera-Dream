@@ -497,3 +497,16 @@ footer {
     color: red;
     font-size: 16px;
 }
+
+.logoutBtn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+}
+
+.logoutBtn:hover {
+    background-color: black;
+}

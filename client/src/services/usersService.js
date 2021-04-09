@@ -19,3 +19,23 @@ export function registerUser(user) {
         }
     });
 }
+
+export function loginUser(user) {
+    return fetch(url + '/users/login', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(user),
+    })
+    .then(res => res.json())
+    .then(res => res);
+}
+
+export function logoutUser(user) {
+    localStorage.clear();
+    console.log('over');
+    window.location.href = '/';
+    window.location.reload();
+}

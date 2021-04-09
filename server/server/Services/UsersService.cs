@@ -1,14 +1,14 @@
 ﻿using Bagheeras.Dream.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using server.Models;
+using server.Services.Contracts;
 using server.ViewModels.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace server.Services.Contracts
+namespace server.Services
 {
     public class UsersService : IUsersService
     {
@@ -19,14 +19,33 @@ namespace server.Services.Contracts
             this.db = db;
         }
 
-        public Task Login(RegisterInputModel input)
+        public async Task<string> Login(LoginInputModel input)
         {
-            throw new NotImplementedException();
+            var user = await this.db.Users.FirstOrDefaultAsync(u => u.Email == input.Email);
+            if (user == null)
+            {
+                return "{\"error\":\"Invalid email\"}";
+            }
+            if(this.CheckPasswords(user.PasswordHash, input.Password))
+            {
+                return "{\"error\":\"Invalid password\"}";
+            }
+
+            var model = new UserViewModel()
+            {
+                UserId = user.Id,
+                Email = user.Email,
+                Username = user.UserName,
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            return json;
         }
 
         public async Task Register(RegisterInputModel input)
         {
-            if (this.db.Users.FirstOrDefaultAsync(u => u.Email == input.Email) != null)
+            if ((await this.db.Users.FirstOrDefaultAsync(u => u.Email == input.Email)) != null)
             {
                 throw new ArgumentException("There is already a register user with the given email.");
             }
@@ -59,6 +78,24 @@ namespace server.Services.Contracts
 
             string savedPasswordHash = Convert.ToBase64String(hashBytes);
             return savedPasswordHash;
+        }
+
+        private bool CheckPasswords(string userPass, string curPass)
+        {
+            byte[] hashBytes = Convert.FromBase64String(userPass);
+
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            var pbkdf2 = new Rfc2898DeriveBytes(curPass, salt, 100000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            for (int i = 0; i < 20; i++)
+            {
+                if (hashBytes[i + 16] != hash[i])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

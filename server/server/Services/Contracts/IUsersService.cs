@@ -10,6 +10,6 @@ namespace server.Services.Contracts
     {
         public Task Register(RegisterInputModel input);
 
-        public Task Login(RegisterInputModel input);
+        public Task<string> Login(LoginInputModel input);
     }
 }

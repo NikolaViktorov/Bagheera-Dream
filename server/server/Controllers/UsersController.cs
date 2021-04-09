@@ -32,5 +32,19 @@ namespace server.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost("login")]
+        public async Task<string> Login(LoginInputModel model)
+        {
+            try
+            {
+                var userData = await this.usersService.Login(model);
+                return userData;
+            }
+            catch (ArgumentException e)
+            {
+                return e.Message;
+            }
+        }
     }
 }
