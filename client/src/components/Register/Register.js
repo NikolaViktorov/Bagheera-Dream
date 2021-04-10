@@ -34,6 +34,8 @@ class Register extends Component {
                 .then(res => {
                     if(res === 'User with this email already exists') {
                         this.displayError(res);
+                    } else {
+                        this.props.history.push('/user/login')
                     }
                 })
         }
@@ -48,6 +50,13 @@ class Register extends Component {
     validateEmail(email) {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
+    }
+
+    componentDidMount() {
+        const loggedInUser = localStorage.getItem('BagheeraCatUserId');
+        if (loggedInUser) {
+            this.props.history.push('/');
+        }
     }
 
     render() {

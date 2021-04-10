@@ -8,12 +8,14 @@ import logo from '../../images/logo.png';
 
 const Header = () => {
     const [user, setUser] = useState()
+    const [userId, setUserId] = useState()
 
     useEffect(() => {
         const loggedInUserId = localStorage.getItem("BagheeraCatUserId");
         const loggedInUserName = localStorage.getItem("BagheeraCatUserName");
           if (loggedInUserId) {
             setUser(loggedInUserName);
+            setUserId(loggedInUserId);
         }
       }, [user]);
     
@@ -43,7 +45,7 @@ const Header = () => {
                             <NavLink activeClassName={styles.active} to="/cats/male">Male Cats</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink activeClassName={styles.active} to={"/user/account/" + localStorage.getItem('userId')}>Hello, {user}</NavLink>
+                            <NavLink activeClassName={styles.active} to={"/user/" + userId}>Hello, {user}</NavLink>
                         </li>
                         <li className="nav-item">
                             <button className="logoutBtn" onClick={logoutUser}>Logout</button>

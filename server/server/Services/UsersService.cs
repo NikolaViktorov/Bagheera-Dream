@@ -64,6 +64,56 @@ namespace server.Services
             await this.db.SaveChangesAsync();
         }
 
+        public async Task<string> GetUserData(string userId)
+        {
+            var user = await this.db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return "Invalid user id!";
+            }
+
+            var model = new UserViewModel()
+            {
+                UserId = user.Id,
+                Username = user.UserName,
+                Email = user.Email,
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            return json;
+        }
+
+        public async Task<bool> CheckUserPassword(string userId, string password)
+        {
+            var user = await this.db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+            else if (this.CheckPasswords(user.PasswordHash, password))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public async Task ChangeUserPassword(ChangePasswordModel input)
+        {
+            var user = await this.db.Users.FirstOrDefaultAsync(u => u.Id == input.UserId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("There is no user with this id");
+            }
+
+            var newHashedPassword = this.HashPassword(input.NewPassword);
+            user.PasswordHash = newHashedPassword;
+            await this.db.SaveChangesAsync();
+        }
+
         private string HashPassword(string password)
         {
             byte[] salt;
@@ -97,5 +147,6 @@ namespace server.Services
             }
             return false;
         }
+
     }
 }

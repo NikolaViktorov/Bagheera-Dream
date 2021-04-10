@@ -39,3 +39,43 @@ export function logoutUser(user) {
     window.location.href = '/';
     window.location.reload();
 }
+
+export function getUserData(userId) {
+    return fetch(url + '/users/user?userId=' + userId, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'content-type': 'application/json',
+        },
+    })
+    .then(res => res.json())
+    .then(res => res);
+}
+
+export function checkPassword(userId, pass) {
+    return fetch(url + '/users/checkPassword?userId=' + userId + '&password=' + pass, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'content-type': 'application/json',
+        },
+    })
+    .then(res => res.json())
+    .then(res => res);
+}
+
+export function changePassword(userId, pass) {
+    const data = {
+        UserId: userId,
+        NewPassword: pass,
+    };
+    return fetch(url + '/users/changePassword', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(res => res)
+}

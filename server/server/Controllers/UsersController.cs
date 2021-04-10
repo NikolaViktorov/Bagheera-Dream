@@ -46,5 +46,47 @@ namespace server.Controllers
                 return e.Message;
             }
         }
+
+        [HttpGet("user")]
+        public async Task<string> GetUserData(string userId)
+        {
+            try
+            {
+                var userData = await this.usersService.GetUserData(userId);
+                return userData;
+            }
+            catch (ArgumentException e)
+            {
+                return e.Message;
+            }
+        }
+
+        [HttpGet("checkPassword")]
+        public async Task<bool> CheckUserPassword(string userId, string password)
+        {
+            try
+            {
+                var userData = await this.usersService.CheckUserPassword(userId, password);
+                return userData;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+        }
+
+        [HttpPost("changePassword")]
+        public async Task<IActionResult> ChangeUserPassword(ChangePasswordModel model)
+        {
+            try
+            {
+                await this.usersService.ChangeUserPassword(model);
+                return Ok();
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

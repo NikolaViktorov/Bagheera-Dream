@@ -11,5 +11,11 @@ namespace server.Services.Contracts
         public Task Register(RegisterInputModel input);
 
         public Task<string> Login(LoginInputModel input);
+
+        public Task<string> GetUserData(string userId);
+
+        public Task<bool> CheckUserPassword(string userId, string password);
+
+        public Task ChangeUserPassword(ChangePasswordModel input);
     }
 }
