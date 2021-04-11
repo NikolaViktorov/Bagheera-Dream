@@ -510,3 +510,14 @@ footer {
 .logoutBtn:hover {
     background-color: black;
 }
+
+.shareCat {
+    margin-left: 70%;
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+}
+
+.shareCat:hover {
+    color: lightgreen;
+}

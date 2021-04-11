@@ -32,6 +32,13 @@ class SharePet extends Component {
         });
     }
 
+    componentDidMount() {
+        const loggedInUser = localStorage.getItem('BagheeraCatUserId');
+        if (!loggedInUser) {
+            this.props.history.push('/user/login');
+        }
+    }
+
     render() {
         return (
             <section class="create">

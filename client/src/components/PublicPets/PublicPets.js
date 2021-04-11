@@ -15,6 +15,10 @@ class PublicPets extends Component {
     }
 
     async componentDidMount() {
+        const loggedInUser = localStorage.getItem('BagheeraCatUserId');
+        if (!loggedInUser) {
+            this.props.history.push('/user/login');
+        }
         const pets = await petsService.getPets(10); // 10 for count of public cats on single page - paging not yet implemented
         this.setState({
             pets: pets,
@@ -24,6 +28,7 @@ class PublicPets extends Component {
     render() {
         return (
             <div>
+                <Link className="shareCat" to="/pets/share">Share your own pet</Link>
                 {
                    this.state.pets !== undefined ? 
                    this.state.pets.map(p => <Pet key={p.PetId} Age={p.Age} ProfileImage={p.ProfileImage} Name={p.Name} ownerEmail={p.OwnerEmail} />) 
