@@ -19,7 +19,7 @@ class FemaleCats extends Component {
 
     render() {
         return (
-            <div>
+            <div className="catContainer">
                 {
                     this.state.cats.map(c => <FemaleCat key={c.CatId} CatId={c.CatId} Age={c.Age} ProfileImage={c.ProfileImage} Name={c.Name}/>)
                 }

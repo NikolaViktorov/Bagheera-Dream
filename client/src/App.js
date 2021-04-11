@@ -16,7 +16,9 @@ import UserDetails from './components/UserDetails/UserDetails';
 import ChangePassword from './components/UserDetails/ChangePassword';
 
 import PublicPets from './components/PublicPets/PublicPets';
+import MyPets from './components/MyPets/MyPets';
 import SharePet from './components/SharePet/SharePet';
+import EditPet from './components/MyPets/EditPet';
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/user/:id" component={UserDetails} />
         <Route path="/pets" exact component={PublicPets} />
         <Route path="/pets/share" exact component={SharePet} />
+        <Route path="/pets/my" exact component={MyPets} />
+        <Route path="/pets/edit/:id" exact component={EditPet} />
         <Route render={() => <h1 >Error Page</h1>} />
       </Switch>
       <Footer />

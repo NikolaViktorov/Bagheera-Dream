@@ -512,7 +512,7 @@ footer {
 }
 
 .shareCat {
-    margin-left: 70%;
+    margin-left: 60%;
     font-size: 25px;
     text-decoration: none;
     color: black;
@@ -520,4 +520,25 @@ footer {
 
 .shareCat:hover {
     color: lightgreen;
+}
+
+.myCats {
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+}
+
+.catContainer {
+    display: flex;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.petContainer {
+    padding-top: 10px;
+    display: flex;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

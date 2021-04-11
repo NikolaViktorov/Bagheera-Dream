@@ -36,9 +36,6 @@ const Header = () => {
                             <NavLink activeClassName={styles.active} exact to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink activeClassName={styles.active} to="/privacy">Privacy</NavLink>
-                        </li>
-                        <li className="nav-item">
                             <NavLink activeClassName={styles.active} to="/cats/female">Female Cats</NavLink>
                         </li>
                         <li className="nav-item">
@@ -61,9 +58,6 @@ const Header = () => {
                         </li>
                         <li className="nav-item">
                             <NavLink activeClassName={styles.active} exact to="/">Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink activeClassName={styles.active} to="/privacy">Privacy</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink activeClassName={styles.active} to="/cats/female">Female Cats</NavLink>

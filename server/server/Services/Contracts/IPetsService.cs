@@ -10,6 +10,14 @@ namespace server.Services.Contracts
     {
         public Task<string> GetPets(int count);
 
-        public Task SharePet(PetInputModel input);
+        public Task<string> SharePet(PetInputModel input);
+
+        public Task<string> GetUserPets(string ownerId);
+
+        public Task DeletePet(string petId);
+
+        public Task EditPet(EditPetInputModel model);
+
+        public Task<string> GetPet(string petId);
     }
 }

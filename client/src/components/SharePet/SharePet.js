@@ -7,8 +7,9 @@ class SharePet extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { 
-            pictures: [], 
+        this.state = {
+            pictures: [],
+            error: '',
         };
         this.onDrop = this.onDrop.bind(this);
     }
@@ -16,20 +17,40 @@ class SharePet extends Component {
     onSharePetSubmitHandler(e) {
         e.preventDefault();
         const { name, age } = e.target;
-        const pet = {
-            Name: name.value,
-            Age: Number(age.value),
-            OwnerId: localStorage.getItem('BagheeraCatUserId'),
-            Files: this.state.pictures,
+        if (name.value.length > 26 || name.value.length <= 1) {
+            this.displayError('Name must be between 2 and 25 characters long!');
+        } else if (age.value <= 0) {
+            this.displayError('Age cannot be negative or 0!');
+        } else if (this.state.pictures.length <= 0) {
+            this.displayError('You must select a picture for your pet!');
+        } else {
+            const pet = {
+                Name: name.value,
+                Age: Number(age.value),
+                OwnerId: localStorage.getItem('BagheeraCatUserId'),
+                Files: this.state.pictures,
+            }
+            petsService.sharePet(pet)
+                .then(res => {
+                    if (res.data === 'You have reached the maximum amount of pets!') {
+                        this.displayError(res.data);
+                    } else {
+                        this.props.history.push('/')
+                    }
+                })
         }
-        petsService.sharePet(pet)
-            .then(res => console.log(res));
     }
 
     onDrop(picture) {
         this.setState({
             pictures: this.state.pictures.concat(picture),
         });
+    }
+
+    displayError(errorMessage) {
+        this.setState({
+            error: errorMessage
+        })
     }
 
     componentDidMount() {
@@ -45,6 +66,7 @@ class SharePet extends Component {
                 <form onSubmit={this.onSharePetSubmitHandler.bind(this)}>
                     <fieldset>
                         <legend>Share your pet with us!</legend>
+                        <span className="error">{this.state.error}</span>
                         <p className="field">
                             <label htmlFor="name">Name</label>
                             <span class="input">
@@ -53,7 +75,7 @@ class SharePet extends Component {
                             </span>
                         </p>
                         <p className="field">
-                        <label htmlFor="age">Age</label>
+                            <label htmlFor="age">Age</label>
                             <span class="input">
                                 <input type="text" name="age" id="age" placeholder="Age" />
                                 <span class="actions"></span>

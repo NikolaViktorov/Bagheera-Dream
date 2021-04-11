@@ -1,6 +1,8 @@
 .catMain {
     margin-left: 100px;
+    margin-top: 10px;
     padding: 5px;
+    text-align: center;
     width: fit-content;
     height: auto;
     border: 1px solid black;

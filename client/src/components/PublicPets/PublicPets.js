@@ -28,14 +28,17 @@ class PublicPets extends Component {
     render() {
         return (
             <div>
+                <Link className="myCats" to="/pets/my">See your pets</Link>
                 <Link className="shareCat" to="/pets/share">Share your own pet</Link>
+                <div className="petContainer">
                 {
-                   this.state.pets !== undefined ? 
+                   this.state.pets.length !== 0 ? 
                    this.state.pets.map(p => <Pet key={p.PetId} Age={p.Age} ProfileImage={p.ProfileImage} Name={p.Name} ownerEmail={p.OwnerEmail} />) 
                    : <h1>There are not any public pets! 
                        Be the first one to share your own pet! <Link to='/pets/share'>Share your pet</Link>
                    </h1>
                 }
+                </div>
             </div>
         );
     }

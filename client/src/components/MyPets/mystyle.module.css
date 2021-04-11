@@ -1,0 +1,37 @@
+.petMain {
+    margin-left: 100px;
+    padding: 5px;
+    width: fit-content;
+    height: auto;
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.petMainHead {
+    font-size: 26px;
+}
+
+.petMainImage {
+    width: 400px;
+    height: auto;
+}
+
+.edit {
+    padding-right: 10px;
+    color: black;
+}
+
+.edit:hover {
+    color: lightgreen;
+}
+
+.delete {
+    color: rgb(251, 84, 84);
+    background-color: transparent;
+    border: none;
+}
+
+.delete:hover {
+    color: red;
+}

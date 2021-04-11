@@ -1,9 +1,11 @@
 .catMain {
     margin-left: 100px;
     padding: 5px;
+    margin-top: 10px;
     width: fit-content;
     height: auto;
     border: 1px solid black;
+    text-align: center;
 }
 
 .catMainHead {
