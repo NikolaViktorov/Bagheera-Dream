@@ -45,6 +45,9 @@ const Header = () => {
                             <NavLink activeClassName={styles.active} to="/cats/male">Male Cats</NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink activeClassName={styles.active} to="/pets">Public Pets</NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink activeClassName={styles.active} to={"/user/" + userId}>Hello, {user}</NavLink>
                         </li>
                         <li className="nav-item">

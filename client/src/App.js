@@ -1,18 +1,22 @@
 import './App.css';
-import { Route, Link, NavLink, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Home from './components/Home/Home';
+
 import CreatePrivateCat from './components/CreatePrivateCat/CreatePrivateCat'
 import FemaleCats from './components/FemaleCats/FemaleCats'
 import MaleCats from './components/MaleCats/MaleCats'
-import Home from './components/Home/Home';
+import CatDetails from './components/CatDetails/CatDetails';
+
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
-import CatDetails from './components/CatDetails/CatDetails';
 import UserDetails from './components/UserDetails/UserDetails';
 import ChangePassword from './components/UserDetails/ChangePassword';
-import Footer from './components/Footer/Footer';
 
+import PublicPets from './components/PublicPets/PublicPets';
+import SharePet from './components/SharePet/SharePet';
 
 function App() {
   return (
@@ -30,6 +34,8 @@ function App() {
         <Route path="/user/login" component={Login} />
         <Route path="/user/changePassword" exact component={ChangePassword} />
         <Route path="/user/:id" component={UserDetails} />
+        <Route path="/pets" exact component={PublicPets} />
+        <Route path="/pets/share" exact component={SharePet} />
         <Route render={() => <h1 >Error Page</h1>} />
       </Switch>
       <Footer />

@@ -1,5 +1,3 @@
-import { post } from 'axios'; 
-
 const url = 'http://localhost:52818';
 
 export function registerUser(user) {

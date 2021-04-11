@@ -1,5 +1,6 @@
 ﻿namespace server.Models.PublicPets
 {
+    using Bagheeras.Dream.Data.Models;
     using System;
 
     public class Pet
@@ -16,5 +17,9 @@
         public int Age { get; set; }
 
         public string ProfileImage { get; set; }
+
+        public virtual ApplicationUser Owner { get; set; }
+
+        public string OwnerId { get; set; }
     }
 }

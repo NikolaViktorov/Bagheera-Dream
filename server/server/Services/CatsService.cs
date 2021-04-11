@@ -9,6 +9,7 @@ using server.Models;
 using server.Models.Cats;
 using server.Models.Enums;
 using server.Services.Contracts;
+using server.Services.Helpers;
 using server.ViewModels.Cats;
 
 namespace server.Services
@@ -24,7 +25,7 @@ namespace server.Services
 
         public async Task AddCat(CatInputModel input)
         {
-            var fileName = this.UploadFile(input);
+            var fileName = ImageUploader.UploadFile(input.File, "catImages");
 
             var cat = new Cat()
             {
@@ -201,28 +202,6 @@ namespace server.Services
             var json = JsonConvert.SerializeObject(model);
 
             return json;
-        }
-
-        private string UploadFile(CatInputModel input)
-        {
-            string fileName = null;
-            if (input.File != null)
-            {
-                string baseFolderPath = Path.GetFullPath(
-                    Path.Combine(
-                        Directory.GetCurrentDirectory(), @"..\..\")
-                    );
-                string clientFolderPath = baseFolderPath + "client\\src";
-                string uploadDir = Path.Combine(clientFolderPath, "catImages");
-                fileName = Guid.NewGuid().ToString() + "-" + input.File.FileName;
-                string filePath = Path.Combine(uploadDir, fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    input.File.CopyTo(fileStream);
-                }
-            }
-
-            return fileName;
         }
     }
 }

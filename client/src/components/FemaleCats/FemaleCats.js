@@ -19,11 +19,11 @@ class FemaleCats extends Component {
 
     render() {
         return (
-            <h1>
+            <div>
                 {
                     this.state.cats.map(c => <FemaleCat key={c.CatId} CatId={c.CatId} Age={c.Age} ProfileImage={c.ProfileImage} Name={c.Name}/>)
                 }
-            </h1>
+            </div>
         );
     }
 

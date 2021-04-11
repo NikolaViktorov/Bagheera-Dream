@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import styles from './mystyle.module.css'; 
 
-class FemaleCat extends Component {
+class MaleCat extends Component {
     constructor(props) {
         super(props);
 
@@ -27,4 +27,4 @@ class FemaleCat extends Component {
     }
 }
 
-export default FemaleCat;
+export default MaleCat;

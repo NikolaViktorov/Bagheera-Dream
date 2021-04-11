@@ -1,0 +1,17 @@
+.petMain {
+    margin-left: 100px;
+    padding: 5px;
+    width: 40%;
+    height: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.petMainHead {
+    font-size: 26px;
+}
+
+.petMainImage {
+    width: 400px;
+    height: auto;
+}

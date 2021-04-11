@@ -69,7 +69,7 @@ class ChangePassword extends Component {
                             <input type="password" name="confirmNewPass" id="confirmNewPass" />
                         </div>
 
-                        <input className="button submit" type="submit" value="Login" />
+                        <input className="button submit" type="submit" value="Change password" />
                     </form>
                 </div>
             </div>

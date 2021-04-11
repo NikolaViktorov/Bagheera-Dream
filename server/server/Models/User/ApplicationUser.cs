@@ -5,12 +5,14 @@ namespace Bagheeras.Dream.Data.Models
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Identity;
+    using server.Models.PublicPets;
 
     public class ApplicationUser : IdentityUser
     {
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Pets = new HashSet<Pet>();
         }
 
         // Audit info
@@ -22,5 +24,7 @@ namespace Bagheeras.Dream.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public virtual ICollection<Pet> Pets { get; set; }
     }
 }
