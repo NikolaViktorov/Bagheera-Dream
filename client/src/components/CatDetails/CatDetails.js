@@ -1,4 +1,5 @@
 import * as catsService from '../../services/catsService';
+import * as usersService from '../../services/usersService';
 
 import { Component } from 'react';
 import { Link } from 'react-router-dom'
@@ -9,18 +10,25 @@ class CatDetails extends Component {
         super(props);
 
         this.state = {
+            isAdmin: false,
             cat: {}
         }
     }
 
     async componentDidMount() {
         const catId = this.props.match.params.id;
-
         const cat = await catsService.getCatDetails(catId);
-
         this.setState({
             cat: cat
         });
+
+        const loggedInUserId = localStorage.getItem('BagheeraCatUserId');
+        const isAdmin = await usersService.isAdministrator(loggedInUserId);
+        if (isAdmin) {
+            this.setState({
+                isAdmin: isAdmin,
+            })
+        };
     }
 
     async componentDidUpdate() {
@@ -34,6 +42,13 @@ class CatDetails extends Component {
             document.body.scrollTop = 0; 
             document.documentElement.scrollTop = 0;
         }
+    }
+
+    onDeleteCatHandler(e) {
+        e.preventDefault();
+        catsService.deleteCat(this.state.cat.CatId)
+            .then(this.props.history.push('/'));
+
     }
 
     renderParents() {
@@ -82,6 +97,7 @@ class CatDetails extends Component {
                         {this.state.cat.Name} is a {this.state.cat.Breed.split('_')[0].toLowerCase() + ' ' + this.state.cat.Breed.split('_')[1].toLowerCase()}
                         &nbsp;with {this.state.cat.Color.toLowerCase()} color. {this.state.cat.Gender === 'Male' ? 'He' : 'She'} is part of the Bagheera's Dream cattery.
                     </p>
+                    { this.state.isAdmin ? <button className="delete" onClick={this.onDeleteCatHandler.bind(this)}>Delete cat</button> : ''}
                     {this.renderParents()}
                 </div>
             );

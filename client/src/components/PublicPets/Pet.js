@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import styles from './mystyle.module.css'; 
 
 class Pet extends Component {

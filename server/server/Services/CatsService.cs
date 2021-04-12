@@ -128,6 +128,35 @@ namespace server.Services
             await this.db.SaveChangesAsync();
         }
 
+        public async Task DeleteCat(string catId)
+        {
+            var cat = await this.db.Cats.FirstOrDefaultAsync(c => c.CatId == catId);
+            if (cat == null)
+            {
+                throw new ArgumentException("There is no cat with given id!");
+            }
+
+            var children = await this.db.Cats.Include(c => c.Father).ThenInclude(c => c.Mother).Where(c => cat.GenderId == 0 ? c.FatherId == cat.CatId : c.MotherId == cat.CatId).ToListAsync();
+
+            foreach (var child in children)
+            {
+                if (cat.GenderId == 0)
+                {
+                    child.Father = null;
+                    child.FatherId = null;
+                }
+                else
+                {
+                    child.Mother = null;
+                    child.MotherId = null;
+                }
+            }
+            await this.db.SaveChangesAsync();
+
+            this.db.Cats.Remove(cat);
+            await this.db.SaveChangesAsync();
+        }
+
         public async Task<string> GetAll(string gender)
         {
             var genderId = (int)Enum.Parse(typeof(Gender), gender);
@@ -160,7 +189,6 @@ namespace server.Services
         public async Task<string> GetCat(string id)
         {
             var cat = await this.db.Cats.FirstOrDefaultAsync(c => c.CatId == id);
-
             if (cat == null)
             {
                 throw new ArgumentException("There is no cat with given id!");
@@ -168,6 +196,7 @@ namespace server.Services
 
             var model = new CatDetailsViewModel()
             {
+                CatId = cat.CatId,
                 Name = cat.Name,
                 Age = cat.Age,
                 Birthday = (DateTime)cat.Birthday,
@@ -201,6 +230,20 @@ namespace server.Services
 
             var json = JsonConvert.SerializeObject(model);
 
+            return json;
+        }
+
+        public async Task<string> GetSliderCats(int count)
+        {
+            var cats = await this.db.Cats.Take(3).Select(c => new CatViewModel()
+            {
+                CatId = c.CatId,
+                Name = c.Name,
+                Age = c.Age,
+                ProfileImage = c.ProfileImage,
+            }).ToListAsync();
+
+            var json = JsonConvert.SerializeObject(cats);
             return json;
         }
     }

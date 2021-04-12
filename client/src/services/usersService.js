@@ -77,3 +77,15 @@ export function changePassword(userId, pass) {
     })
     .then(res => res)
 }
+
+export function isAdministrator(userId) {
+    return fetch(url + '/users/isAdministrator?userId=' + userId, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'content-type': 'application/json',
+        },
+    })
+    .then(res => res.json())
+    .then(res => res);
+}

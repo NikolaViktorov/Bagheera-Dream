@@ -542,3 +542,31 @@ footer {
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.imgPreview {
+    width: 30%;
+    display: flex;
+    margin: 0 auto;
+}
+
+.submit {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    margin: 0 auto;
+    font-size: 25px;
+}
+
+.submit:hover {
+    color: lightgreen;
+}
+
+.delete {
+    color: rgb(251, 84, 84);
+    background-color: transparent;
+    border: none;
+}
+
+.delete:hover {
+    color: red;
+}

@@ -15,6 +15,8 @@ namespace Bagheeras.Dream.Data.Models
             this.Pets = new HashSet<Pet>();
         }
 
+        public bool IsAdministrator { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

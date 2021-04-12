@@ -9,8 +9,7 @@ const Footer = () => {
                         <p>
                             Bagheera's Dream is a cattery mainly for the british shorthair breed.
                              We have lots of cute kittens and if you want to get one for yourself or 
-                             for seomeone you know, you can see which kitten are for sale from 
-                             <a href="/Cats/ForSale">HERE</a>.
+                             for seomeone you know, you <b>will</b> be able to see and order some from this website.                     
                         </p>
                         <p>&copy; Bagheera's Dream.</p>
                     </div>
@@ -29,15 +28,10 @@ const Footer = () => {
                         </div>
                         <div className="row">
                             <div className="col-md-6">
-                                <p><a href="/Cats/Home">Home</a></p>
-                                <p><a href="#">Features</a></p>
-                                <p><a href="#">How it works</a></p>
-                                <p><a href="#">Our clients</a></p>
-                            </div>
-                            <div className="col-md-6">
-                                <p><a href="#">Plans &amp; pricing</a></p>
-                                <p><a href="#">Affiliates</a></p>
-                                <p><a href="#">Terms</a></p>
+                                <p><a href="/">Home</a></p>
+                                <p><a href="/cats/female">Female Cats</a></p>
+                                <p><a href="/cats/male">Male Cats</a></p>
+                                <p><a href="/pets">Public Pets</a></p>
                             </div>
                         </div>
                     </div>

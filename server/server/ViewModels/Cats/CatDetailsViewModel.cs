@@ -6,6 +6,8 @@
 
     public class CatDetailsViewModel
     {
+        public string CatId { get; set; }
+
         public string Name { get; set; }
 
         public int Age { get; set; }

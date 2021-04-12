@@ -100,6 +100,7 @@ namespace server.Services
 
             return true;
         }
+        
         public async Task ChangeUserPassword(ChangePasswordModel input)
         {
             var user = await this.db.Users.FirstOrDefaultAsync(u => u.Id == input.UserId);
@@ -148,5 +149,15 @@ namespace server.Services
             return false;
         }
 
+        public async Task<bool> IsAdministrator(string userId)
+        {
+            var user = await this.db.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid user id!");
+            }
+
+            return user.IsAdministrator;
+        }
     }
 }

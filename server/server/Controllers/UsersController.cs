@@ -61,6 +61,20 @@ namespace server.Controllers
             }
         }
 
+        [HttpGet("isAdministrator")]
+        public async Task<bool> IsAdministrator(string userId)
+        {
+            try
+            {
+                var result = await this.usersService.IsAdministrator(userId);
+                return result;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+        }
+
         [HttpGet("checkPassword")]
         public async Task<bool> CheckUserPassword(string userId, string password)
         {

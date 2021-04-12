@@ -2,6 +2,8 @@ import * as petsService from '../../services/petsService'
 
 import ImageUploader from 'react-images-upload';
 import { Component } from 'react'
+import { wait } from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 
 class SharePet extends Component {
 
@@ -36,6 +38,7 @@ class SharePet extends Component {
                         this.displayError(res.data);
                     } else {
                         this.props.history.push('/')
+                        document.documentElement.scrollTop = 0;
                     }
                 })
         }
@@ -45,6 +48,7 @@ class SharePet extends Component {
         this.setState({
             pictures: this.state.pictures.concat(picture),
         });
+        this.previewPic(picture);
     }
 
     displayError(errorMessage) {
@@ -58,6 +62,11 @@ class SharePet extends Component {
         if (!loggedInUser) {
             this.props.history.push('/user/login');
         }
+    }
+
+    previewPic(pic) {
+        console.log(pic)
+        document.getElementById('preview').src = window.URL.createObjectURL(pic[0]);
     }
 
     render() {
@@ -88,6 +97,7 @@ class SharePet extends Component {
                             imgExtension={['.jpg', '.gif', '.png', '.gif']}
                             maxFileSize={5242880}
                         />
+                        <img className="imgPreview" src='' id='preview' alt='' />
                         <input className="button submit" type="submit" value="Share your pet" />
                     </fieldset>
                 </form>

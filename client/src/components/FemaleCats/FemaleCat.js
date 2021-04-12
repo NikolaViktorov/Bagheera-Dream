@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import styles from './mystyle.module.css'; 
 
+
 class FemaleCat extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,7 @@ class FemaleCat extends Component {
             id: props.CatId,
             name: props.Name,
             age: props.Age,
-            img: require("../../catImages/" + props.ProfileImage)
+            img: require("../../catImages/" + props.ProfileImage),
         }
     }
 

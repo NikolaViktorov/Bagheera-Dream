@@ -41,14 +41,14 @@ export function createPrivateCat(cat) {
                 f.append("Birthday",cat.Birthday);
                 f.append("FatherName",cat.FatherName);
                 f.append("MotherName",cat.MotherName);
-                post(url + '/Cats/createPrivateCat', f, {
+                return post(url + '/Cats/createPrivateCat', f, {
                        headers: {'Content-Type': 'multipart/form-data'} // works
                 });
            }
 }
 
 export function getSliderCats(count) {
-        return fetch(url + '/Cats/cats?gender=Male', {
+        return fetch(url + '/Cats/sliderCats?count=' + count, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
@@ -58,4 +58,17 @@ export function getSliderCats(count) {
         .then(res => res.json())
         .then(data => data)
         .catch(err => console.log(err));
+}
+
+export function deleteCat(catId) {
+        return fetch(url + '/Cats/deleteCat?catId=' + catId, {
+                method: 'DELETE',
+                mode: 'cors',
+                headers: {
+                        'content-type': 'application/json',
+                },
+        })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err); 
 }

@@ -13,5 +13,8 @@
 
         public Task AddCat(CatInputModel cat);
 
+        public Task DeleteCat(string catId);
+
+        public Task<string> GetSliderCats(int count);
     }
 }

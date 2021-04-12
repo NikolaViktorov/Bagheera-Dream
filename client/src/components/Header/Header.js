@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 
 import { Link, NavLink } from 'react-router-dom'
 import styles from './header.module.css'
-import { logoutUser } from '../../services/usersService';
+import * as usersService from '../../services/usersService';
 
 import logo from '../../images/logo.png';
 
 const Header = () => {
     const [user, setUser] = useState()
     const [userId, setUserId] = useState()
+    const [isAdmin, setIsAdmin] = useState()
 
-    useEffect(() => {
+    useEffect(async () => {
         const loggedInUserId = localStorage.getItem("BagheeraCatUserId");
         const loggedInUserName = localStorage.getItem("BagheeraCatUserName");
           if (loggedInUserId) {
             setUser(loggedInUserName);
             setUserId(loggedInUserId);
+            const isAdmin = await usersService.isAdministrator(loggedInUserId);
+            setIsAdmin(isAdmin);
         }
       }, [user]);
     
@@ -48,8 +51,12 @@ const Header = () => {
                             <NavLink activeClassName={styles.active} to={"/user/" + userId}>Hello, {user}</NavLink>
                         </li>
                         <li className="nav-item">
-                            <button className="logoutBtn" onClick={logoutUser}>Logout</button>
+                            <button className="logoutBtn" onClick={usersService.logoutUser}>Logout</button>
                         </li>
+                        {isAdmin ? 
+                        <li className="nav-item">
+                            <NavLink activeClassName={styles.active} to={"/private/create"}>Add cat</NavLink>
+                        </li> : ''}
                     </ul>) : (<ul className="ml-auto">
                     <li className="nav-item">
                             <Link to="/">

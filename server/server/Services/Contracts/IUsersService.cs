@@ -17,5 +17,6 @@ namespace server.Services.Contracts
         public Task<bool> CheckUserPassword(string userId, string password);
 
         public Task ChangeUserPassword(ChangePasswordModel input);
+        public Task<bool> IsAdministrator(string userId);
     }
 }
