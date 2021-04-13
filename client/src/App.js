@@ -20,6 +20,8 @@ import MyPets from './components/MyPets/MyPets';
 import SharePet from './components/SharePet/SharePet';
 import EditPet from './components/MyPets/EditPet';
 
+import Cat404 from './images/404.jpg';
+
 function App() {
   return (
     <div className="container">
@@ -40,7 +42,10 @@ function App() {
         <Route path="/pets/share" exact component={SharePet} />
         <Route path="/pets/my" exact component={MyPets} />
         <Route path="/pets/edit/:id" exact component={EditPet} />
-        <Route render={() => <h1 >Error Page</h1>} />
+        <Route render={() => <div>
+          <h1>Error Page</h1>
+          <img src={Cat404} />
+        </div>} />
       </Switch>
       <Footer />
     </div>

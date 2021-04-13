@@ -4,5 +4,6 @@
     {
         Lilac = 0,
         Gray = 1,
+        White = 2,
     }
 }

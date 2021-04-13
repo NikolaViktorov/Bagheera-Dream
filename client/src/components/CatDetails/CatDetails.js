@@ -39,7 +39,7 @@ class CatDetails extends Component {
             this.setState(
                 { cat: cat }
             )
-            document.body.scrollTop = 0; 
+            document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
     }
@@ -51,38 +51,47 @@ class CatDetails extends Component {
 
     }
 
+    renderFather() {
+        return (
+            <div className="parent">
+                <div className="card-image">
+                    <img className="img-fluid" src={require("../../catImages/" + this.state.cat.Father.ProfileImage).default} alt="#" />
+                </div>
+                <div className="parent-info">
+                    <h3 className="card-title">Father - {this.state.cat.Father.Name}</h3>
+                </div>
+                <div className="button-container">
+                    <Link className="btnMore" to={'/cat/' + this.state.cat.Father.CatId}>SEE MORE</Link>
+                </div>
+            </div>
+        );
+    }
+
+    renderMother() {
+        return (
+            <div className="parent">
+                <div className="card-image">
+                    <img className="img-fluid" src={require("../../catImages/" + this.state.cat.Mother.ProfileImage).default} alt="#" />
+                </div>
+                <div className="parent-info">
+                    <h3 className="card-title">Mother - {this.state.cat.Mother.Name}</h3>
+                </div>
+                <div className="button-container">
+                    <Link className="btnMore" to={'/cat/' + this.state.cat.Mother.CatId}>SEE MORE</Link>
+                </div>
+            </div>
+        );
+    }
+
     renderParents() {
-        if (this.state.cat.Father !== null && this.state.cat.Mother !== null) {
             return (
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="parent">
-                            <div className="card-image">
-                                <img className="img-fluid" src={require("../../catImages/" + this.state.cat.Father.ProfileImage).default} alt="#" />
-                            </div>
-                            <div className="parent-info">
-                                <h3 className="card-title">Father - {this.state.cat.Father.Name}</h3>
-                            </div>
-                            <div className="button-container">
-                                <Link className="btnMore" to={'/cat/' + this.state.cat.Father.CatId}>SEE MORE</Link>
-                            </div>
-                        </div>
-
-                        <div className="parent">
-                            <div className="card-image">
-                                <img className="img-fluid" src={require("../../catImages/" + this.state.cat.Mother.ProfileImage).default} alt="#" />
-                            </div>
-                            <div className="parent-info">
-                                <h3 className="card-title">Mother - {this.state.cat.Mother.Name}</h3>
-                            </div>
-                            <div className="button-container">
-                                <Link className="btnMore" to={'/cat/' + this.state.cat.Mother.CatId}>SEE MORE</Link>
-                            </div>
-                        </div>
+                        {this.state.cat.Father !== null ? this.renderFather() : ''}
+                        {this.state.cat.Mother !== null ? this.renderMother() : ''}
                     </div>
                 </div>
             );
-        }
     }
 
     returnDetails() {

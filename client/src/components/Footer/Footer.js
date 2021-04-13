@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
     return (
     <footer>
@@ -28,10 +30,10 @@ const Footer = () => {
                         </div>
                         <div className="row">
                             <div className="col-md-6">
-                                <p><a href="/">Home</a></p>
-                                <p><a href="/cats/female">Female Cats</a></p>
-                                <p><a href="/cats/male">Male Cats</a></p>
-                                <p><a href="/pets">Public Pets</a></p>
+                                <p><Link to="/">Home</Link></p>
+                                <p><Link to="/cats/female">Female Cats</Link></p>
+                                <p><Link to="/cats/male">Male Cats</Link></p>
+                                <p><Link to="/pets">Public Pets</Link></p>
                             </div>
                         </div>
                     </div>

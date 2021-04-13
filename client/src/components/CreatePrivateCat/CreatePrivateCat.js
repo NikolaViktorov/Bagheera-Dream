@@ -121,6 +121,7 @@ class CreatePrivateCat extends Component {
                                 <select type="text" name="color">
                                     <option value="0">Lilac</option>
                                     <option value="1">Gray</option>
+                                    <option value="2">White</option>
                                 </select>
                                 <span className="actions"></span>
                             </span>

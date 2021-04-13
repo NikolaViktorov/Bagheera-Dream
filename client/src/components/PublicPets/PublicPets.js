@@ -33,7 +33,7 @@ class PublicPets extends Component {
                 <div className="petContainer">
                 {
                    this.state.pets.length !== 0 ? 
-                   this.state.pets.map(p => <Pet key={p.PetId} Age={p.Age} ProfileImage={p.ProfileImage} Name={p.Name} ownerEmail={p.OwnerEmail} />) 
+                   this.state.pets.map(p => <Pet key={p.PetId} PetId={p.PetId} Age={p.Age} ProfileImage={p.ProfileImage} Name={p.Name} ownerEmail={p.OwnerEmail} />) 
                    : <h1>There are not any public pets! 
                        Be the first one to share your own pet! <Link to='/pets/share'>Share your pet</Link>
                    </h1>

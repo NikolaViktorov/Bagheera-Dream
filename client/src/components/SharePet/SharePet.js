@@ -2,8 +2,6 @@ import * as petsService from '../../services/petsService'
 
 import ImageUploader from 'react-images-upload';
 import { Component } from 'react'
-import { wait } from '@testing-library/dom';
-import { waitFor } from '@testing-library/dom';
 
 class SharePet extends Component {
 
